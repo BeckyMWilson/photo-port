@@ -1,26 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 
 function ContactForm() {
+    
+    // eslint-disable-next-line
+    const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+    // eslint-disable-next-line
+    const { name, email, message } = formState;
+
+function handleChange(e) {
+    setFormState({...formState, [e.target.name]: e.target.value })
+}
+
+function handleSubmit(e) {
+    e.preventDefault();
+}
 
 // JSX
 return (
     <section>
         <h1>Contact me</h1>
-        <form id="contact-form">
-            // name input
+        <form id="contact-form" onSubmit={handleSubmit}>
             <div>
-                <label htmlFor=">Name:</label" />
-                <input type="text" name="name" />
+                <label htmlFor="name">Name:</label>
+                <input type="text" defaultValue={name} onChange={handleChange} name="name" />
             </div>
-            // email input
             <div>
                 <label htmlFor="email">Email address:</label>
-                <input type="email" name="email" />
+                <input type="email" defaultValue={email} name="email" onChange={handleChange} />
             </div>
-            // message text area
             <div>
                 <label htmlFor="message">Message:</label>
-                <textarea name="message" rows="5" />
+                <textarea name="message" defaultValue={message} onChange={handleChange} rows="5" />
             </div>
 
             <button type="submit">Submit</button>
